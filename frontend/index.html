@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serverless Multi-Tier App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      background: #f4f4f4;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌩️ Serverless Multi-Tier App</h1>
+  <p id="response">Click the button to fetch data from backend.</p>
+  <button onclick="fetchData()">Fetch Backend Data</button>
+
+  <script>
+  async function fetchData() {
+    const apiUrl = "your api_endpoint output from terminal"; 
+    const responseElement = document.getElementById("response");
+    responseElement.innerText = "Fetching data...";
+
+    try {
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+
+      const data = await res.json();
+      responseElement.innerText = data.message || JSON.stringify(data, null, 2);
+    } catch (error) {
+      responseElement.innerText = `Error: ${error.message}`;
+      console.error("Fetch failed:", error);
+    }
+  }
+</script>
+</body>
+</html>
